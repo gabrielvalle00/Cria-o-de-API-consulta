@@ -16,4 +16,4 @@ function carregarPagina(pagina) {
 }
 
 
-localStorage.setItem(`ipAPI`, `http://192.168.70.125:2000/`)
+localStorage.setItem(`ipAPI`, `http://10.0.3.252:3000/`);
