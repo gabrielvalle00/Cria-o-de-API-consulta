@@ -15,8 +15,18 @@ class Usuario {
             const [result] = await conn.query(pSql, pValues);
         } catch (error) {
             throw error;
-        }finally{
-            await conn.release();
+        }
+    }
+
+
+    static async listarUsuarios (){
+        try {
+            const conn = await connection();
+            const [rows] = await conn.query('SELECT ID_USUARIO, NOME FROM USUARIO');
+            console.log(rows);
+            return rows;
+        } catch (error) {
+            throw error;
         }
     }
 }

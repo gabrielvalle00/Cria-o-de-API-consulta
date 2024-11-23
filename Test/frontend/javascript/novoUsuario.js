@@ -1,7 +1,12 @@
 
 $(document).ready(function () {
+    $(document).off ('submit', '#formUsuario');
+
     $(document).on('submit', '#formUsuario', async function (event) {
         event.preventDefault();
+
+    
+
         const formData = {
             nome: document.getElementById('nome').value,
             email: document.getElementById('email').value
