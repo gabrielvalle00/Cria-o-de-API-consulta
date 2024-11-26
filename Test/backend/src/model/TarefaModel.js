@@ -10,7 +10,7 @@ class Tarefa {
     }
 
 
-    async insertTarefa (){
+    async insertTarefa() {
         try {
             const conn = await connection();
             const pSql = "INSERT INTO TAREFA (ID_USUARIO,DESCRICAO, EQUIPE, PRIORIDADE,STATUS) VALUES (?,?,?,?,?)";
@@ -23,7 +23,7 @@ class Tarefa {
     }
 
 
-    static async listarUsuarios (){
+    static async listarUsuarios() {
         try {
             const conn = await connection();
             const [rows] = await conn.query('SELECT ID_USUARIO, NOME FROM USUARIO');
@@ -31,6 +31,32 @@ class Tarefa {
             return rows;
         } catch (error) {
             throw error;
+        }
+    }
+
+
+    static async listarTarefas() {
+        try {
+            const conn = await connection();
+            const [rows] = await conn.query(`SELECT 
+                T.id_tarefa,
+                T.id_usuario,
+                T.descricao,
+                T.equipe,
+                U.nome,
+                T.prioridade,
+                T.data_cadastro,
+                T.status
+                FROM
+                tarefa T
+                    INNER JOIN
+            usuario U ON T.id_usuario = U.id_usuario;`);
+            console.log("teste", rows);
+            return rows;
+        } catch (error) {
+            // throw error;
+            console.log(error);
+            
         }
     }
 }

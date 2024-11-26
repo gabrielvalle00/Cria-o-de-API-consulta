@@ -6,6 +6,8 @@ const router= Router();
 
 router.post('/novoUsuario', UsuarioController.novoUsuario);
 router.get('/listarUsuarios', UsuarioController.listarUsuarios);
+router.get('/listartarefas', TarefaController.listarTarefas);
 router.post('/novaTarefa', TarefaController.novaTarefa);
+router.put('/atualizarStatus/:id', TarefaController.atualizarStatus);
 
 export default router;
