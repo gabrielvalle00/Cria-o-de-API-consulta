@@ -9,5 +9,6 @@ router.get('/listarUsuarios', UsuarioController.listarUsuarios);
 router.get('/listartarefas', TarefaController.listarTarefas);
 router.post('/novaTarefa', TarefaController.novaTarefa);
 router.put('/atualizarStatus/:id', TarefaController.atualizarStatus);
+router.delete('/deletar/:id', TarefaController.deletar);
 
 export default router;

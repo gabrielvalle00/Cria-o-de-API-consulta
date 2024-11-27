@@ -43,9 +43,9 @@ $(document).ready(async function () {
 </div>
 <div class="card-status">
     <select class="status-dropdown" data-id="${tarefa.id_tarefa}">
-        <option value="Não Iniciado">${mappedStatus === "Não Iniciado" ? "selected" : ""}> Não Iniciado</option>
-        <option value="Em Desenvolvimento">${mappedStatus === "Em Desenvolvimento" ? "selected" : ""}> Em Desenvolvimento</option>
-        <option value="Finalizado">${mappedStatus === "Finalizado" ? "selected" : ""}> Finalizado </option>
+        <option value="Não Iniciado"${mappedStatus === "Não Iniciado" ? "selected" : " "}>Não Iniciado</option>
+        <option value="Em Desenvolvimento"${mappedStatus === "Em Desenvolvimento" ? "selected" : "" }> Em Desenvolvimento</option>
+        <option value="Finalizado"${mappedStatus === "Finalizado" ? "selected" : " "}> Finalizado </option>
     </select>
 
     <button class="btn-save-status" data-id="${tarefa.id_tarefa}">salvar</button>
@@ -64,13 +64,28 @@ $(document).ready(async function () {
     }
     await buscarTarefas();
 
-    $(document).off ('submit', '#btn-save-status');
-    $(document).on('submit', '#btn-save-status', async function (event) {
-        const taskId = $(this).data(id);
+    $(document).off ('click', '.btn-save-status');
+    $(document).on('click', '.btn-save-status', async function (event) {
+        const taskId = $(this).data('id');
         const newStatus = $(`.status-dropdown[data-id='${taskId}']`).val();
 
         try {
             await axios.put(`${localStorage.getItem('ipAPI')}atualizarStatus/${taskId}`, {status:newStatus});
+            await buscarTarefas();
+        } catch (error) {
+            console.log(error);
+            
+        }
+
+    })
+
+    $(document).off ('click', '.btn-delete');
+    $(document).on('click', '.btn-delete', async function (event) {
+        const taskId = $(this).data('id');
+        const newStatus = $(`.status-dropdown[data-id='${taskId}']`).val();
+
+        try {
+            await axios.delete(`${localStorage.getItem('ipAPI')}deletar/${taskId}`, {status:newStatus});
             await buscarTarefas();
         } catch (error) {
             console.log(error);

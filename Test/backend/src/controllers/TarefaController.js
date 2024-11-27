@@ -45,10 +45,25 @@ export const TarefaController = {
 
             const { id } = req.params;
             const { status } = req.body;
+            console.log(id,status);
+            
             const newStatus = status.toUpperCase();
-            const tarefas = await Tarefa.atualizarStatus(id.newStatus);
+            const tarefas = await Tarefa.atualizarStatus(id,newStatus);
             console.log("opaa", tarefas);
             res.json({ tarefas });
+
+        } catch (error) {
+            res.json({ message: error })
+        }
+    },
+
+    deletar: async (req, res) => {
+        try {
+
+            const { id } = req.params;
+            const deletar = await Tarefa.deletar(id);
+            console.log("opaa", deletar);
+            res.json({ deletar });
 
         } catch (error) {
             res.json({ message: error })
