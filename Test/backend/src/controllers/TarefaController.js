@@ -68,7 +68,35 @@ export const TarefaController = {
         } catch (error) {
             res.json({ message: error })
         }
-    }
+    },
+
+    listarTarefa: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const tarefa = await Tarefa.listarTarefa(id);
+            console.log("opaa", tarefa);
+            res.json({ tarefa });
+
+        } catch (error) {
+            res.json({ message: error })
+        }
+    },
+
+
+    atualizarTarefa: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { id_usuario, descricao, equipe, prioridade  } = req.body;
+            const tarefa = new Tarefa({ id_usuario, descricao, equipe, prioridade });
+            console.log(tarefa);
+
+            const result = await tarefa.atualizarTarefa(id);
+
+            res.json({ result });
+        } catch (error) {
+            res.json({ message: error })
+        }
+    },
 }
 export default TarefaController;
 

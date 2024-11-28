@@ -87,10 +87,22 @@ $(document).ready(async function () {
         try {
             await axios.delete(`${localStorage.getItem('ipAPI')}deletar/${taskId}`, {status:newStatus});
             await buscarTarefas();
+            alert("Tarefa excluida com sucesso!")
         } catch (error) {
             console.log(error);
             
         }
+
+    })
+
+
+    $(document).off ('click', '.btn-edit');
+    $(document).on('click', '.btn-edit', async function (event) {
+        const taskId = $(this).data('id');
+       sessionStorage.setItem("taskId", taskId);
+       console.log(taskId);
+       
+
 
     })
 
